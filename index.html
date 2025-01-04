@@ -43,7 +43,7 @@
                 `;
             } else if (dropboxMatch && dropboxMatch[0]) {
                 // Replace dl=0 with dl=1 to force direct download for Dropbox links
-                const directLink = inputLink.replace('?dl=0', '?dl=1');
+                const directLink = inputLink.replace('&dl=0', '&dl=1');
                 output.innerHTML = `
                     <p>Direct Download Link (Dropbox):</p>
                     <a href="${directLink}" target="_blank">${directLink}</a>
