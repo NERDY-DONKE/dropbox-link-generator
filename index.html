@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Google Drive, Docs & Dropbox Direct Link Generator</title>
+    <title>Direct Link Generator (Google Drive, Docs, Dropbox)</title>
 </head>
 <body>
-    <h1>Google Drive, Docs & Dropbox Direct Link Generator</h1>
-    <p>Paste your Google Drive, Docs, or Dropbox file link below:</p>
+    <h1>Direct Link Generator (Google Drive, Docs, Dropbox)</h1>
+    <p>Paste your Google Drive, Google Docs, or Dropbox file link below:</p>
     <input type="text" id="fileLink" placeholder="Enter Google Drive, Docs, or Dropbox link" style="width: 100%; padding: 10px;" />
     <button onclick="generateDirectLink()" style="margin-top: 10px; padding: 10px 20px;">Generate Link</button>
     <p id="output" style="margin-top: 20px;"></p>
@@ -24,13 +24,13 @@
             const docsMatch = inputLink.match(/docs.google.com\/document\/d\/([a-zA-Z0-9_-]+)/);
             
             // Regular expression to match Dropbox file links
-            const dropboxMatch = inputLink.match(/dropbox.com\/s\/([a-zA-Z0-9_-]+)\/([^?]+)/);
+            const dropboxMatch = inputLink.match(/dropbox.com\/scl\/fi\/([a-zA-Z0-9_-]+)\/([^?]+)/);
             
             if (driveMatch && driveMatch[1]) {
                 const fileId = driveMatch[1];
                 const directLink = `https://drive.google.com/uc?export=download&id=${fileId}`;
                 output.innerHTML = `
-                    <p>Direct Download Link (Drive):</p>
+                    <p>Direct Download Link (Google Drive):</p>
                     <a href="${directLink}" target="_blank">${directLink}</a>
                 `;
             } else if (docsMatch && docsMatch[1]) {
@@ -38,11 +38,11 @@
                 // Modify the export format to .docx
                 const directLink = `https://docs.google.com/document/d/${fileId}/export?format=docx`;
                 output.innerHTML = `
-                    <p>Direct Download Link (Docs - .docx):</p>
+                    <p>Direct Download Link (Google Docs - .docx):</p>
                     <a href="${directLink}" target="_blank">${directLink}</a>
                 `;
             } else if (dropboxMatch && dropboxMatch[0]) {
-                // Change dl=0 to dl=1 to force direct download for Dropbox links
+                // Replace dl=0 with dl=1 to force direct download for Dropbox links
                 const directLink = inputLink.replace('?dl=0', '?dl=1');
                 output.innerHTML = `
                     <p>Direct Download Link (Dropbox):</p>
